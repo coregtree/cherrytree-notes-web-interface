@@ -53,7 +53,7 @@ and promt a download for "image-text-cache.json". MAKE SURE TO ALLOW MULTIPLE DO
 IN YOUR BROWSER. Upload both of these cache files to the sites main root folder.
 
 ## Support Me
-If this you like this project you can donate here, thank you: [Ko-Fi Link](https://ko-fi.com/coregtree)
+If you like this project you can donate here, thank you: [Ko-Fi Link](https://ko-fi.com/coregtree)
 
 
 
