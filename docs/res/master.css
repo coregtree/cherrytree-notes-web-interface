@@ -43,23 +43,103 @@ ul.outermost {
   /* ALSO SET adjustSectionFont variable for font size IN adjustSectionFont function in master-script.js  */
  --page-font-modifier: 0.6rem;
 }
-.page * {
+
+.page table {
   color:white !important;
 }
-.page p, .page li, .page h1, .page h2, .page h3, .page sup {
+.page p, .page li {
   font-size: clamp(
     var(--page-font-modifier, 0.6rem), 
     1vw + var(--page-font-modifier, 0.6rem), 
     calc(var(--page-font-modifier, 0.6rem) + 0.6rem)
   );
+  color:white !important;
 }
-div.page p, div.page li, div.page h1, div.page h2, div.page h3, div.page sup { 
+/* Treat underlined text as a title. */
+/* .page [style*="underline"] { 
+  font-size: calc(clamp(
+    var(--page-font-modifier, 0.6rem), 
+    1vw + var(--page-font-modifier, 0.6rem), 
+    calc(var(--page-font-modifier, 0.6rem) + 0.6rem)
+  ) + 1rem);
+} */
+.page h1 {
+  font-size: calc(clamp(
+    var(--page-font-modifier, 0.6rem), 
+    1vw + var(--page-font-modifier, 0.6rem), 
+    calc(var(--page-font-modifier, 0.6rem) + 0.6rem)
+  ) + 1rem);
+  color:white !important;
+}
+.page h2 {
+  font-size: calc(clamp(
+    var(--page-font-modifier, 0.6rem), 
+    1vw + var(--page-font-modifier, 0.6rem), 
+    calc(var(--page-font-modifier, 0.6rem) + 0.6rem)
+  ) + 0.7rem);
+  color:white !important;
+}
+.page h3 {
+  font-size: calc(clamp(
+    var(--page-font-modifier, 0.6rem), 
+    1vw + var(--page-font-modifier, 0.6rem), 
+    calc(var(--page-font-modifier, 0.6rem) + 0.6rem)
+  ) + 0.5rem);
+  color:white !important;
+}
+.page sup {
+  font-size: calc(clamp(
+    var(--page-font-modifier, 0.6rem), 
+    1vw + var(--page-font-modifier, 0.6rem), 
+    calc(var(--page-font-modifier, 0.6rem) + 0.6rem)
+  ) - 0.2rem);
+  color:white !important;
+}
+
+div.page p, div.page li { 
   font-size: clamp(
     var(--page-font-modifier, 0.6rem), 
     1vw + var(--page-font-modifier, 0.6rem), 
     calc(var(--page-font-modifier, 0.6rem) + 0.6rem)
   ) !important;
 }
+/* Treat underlined text as a title. */
+/* div.page [style*="underline"] { 
+  font-size: calc(clamp(
+    var(--page-font-modifier, 0.6rem), 
+    1vw + var(--page-font-modifier, 0.6rem), 
+    calc(var(--page-font-modifier, 0.6rem) + 0.6rem)
+  ) + 1rem) !important;
+} */
+div.page h1 { 
+  font-size: calc(clamp(
+    var(--page-font-modifier, 0.6rem), 
+    1vw + var(--page-font-modifier, 0.6rem), 
+    calc(var(--page-font-modifier, 0.6rem) + 0.6rem)
+  ) + 1rem) !important;
+}
+div.page h2 { 
+  font-size: calc(clamp(
+    var(--page-font-modifier, 0.6rem), 
+    1vw + var(--page-font-modifier, 0.6rem), 
+    calc(var(--page-font-modifier, 0.6rem) + 0.6rem)
+  ) + 0.7rem) !important;
+}
+div.page h3 { 
+  font-size: calc(clamp(
+    var(--page-font-modifier, 0.6rem), 
+    1vw + var(--page-font-modifier, 0.6rem), 
+    calc(var(--page-font-modifier, 0.6rem) + 0.6rem)
+  ) + 0.5rem) !important;
+}
+div.page sup { 
+  font-size: calc(clamp(
+    var(--page-font-modifier, 0.6rem), 
+    1vw + var(--page-font-modifier, 0.6rem), 
+    calc(var(--page-font-modifier, 0.6rem) + 0.6rem)
+  ) - 0.2rem) !important;
+}
+
 
 @media (min-width: 1px) {
   .tree-panel.tree-panel.tree-panel {
@@ -364,7 +444,7 @@ mark {
 }
 
 ul li a.active {
-  background-color: #4CAF50; /* Green background for the active item */
+  background-color: lightslategrey; /* Light gray background for the active item */
   color: white;
 }
 
