@@ -15,7 +15,7 @@ View the full guide here:
 - Added a dark theme.
 
 ## Download
-[Releases](https://github.com/coregtree/cherrytree-notes-web-interface/releases)
+See: [Releases](https://github.com/coregtree/cherrytree-notes-web-interface/releases)
 
 ## Basic Setup
 1. Export your notes to HTML using these export settings:
