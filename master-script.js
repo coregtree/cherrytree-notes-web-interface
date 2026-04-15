@@ -1927,7 +1927,7 @@ window.addEventListener('load', () => {
                 // The text of each image from the site is checked against the user query using the regular text token filter function and then
                 // the images containing the query are stored in queryMatchedImages as the type 'pageimage'.
                 for (const [key, pageImages] of Object.entries(ocrTextForAllImages)) { // Retrieve 
-                    if (pageImages.length) { // In cases where there is only text and single page search occurs this will be undefined.
+                    if (pageImages && pageImages.length) { // In cases where there is only text and single page search occurs this will be undefined.
                         for (let i = 0; i < pageImages.length; i++) {
                             if (filterTextTokensByQuery(pageImages[i].tokenizedText, searchValue).length > 0) {
                                 queryMatchedImages.push(ocrTextForAllImages[key][i]);
