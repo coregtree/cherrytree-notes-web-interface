@@ -4,15 +4,15 @@ A web interface upgrade for cherrytree notes providing a significant upgrade to 
 View the full guide here:
 
 ## Features
-• Fully client side full site text and image search meaning you can host this interface with basic static website hosting.
-• Cache powered searching for pages and images for instant search results.
-• The current page view is sharable using a link so you can bookmark it to come back to it later.
-• Added font size adjustment buttons.
-• Added automatic resizing of the page contents to the largest available image.
-• Made both panels resizable by dragging the middle divider.
-• Made the interface mobile friendly allowing you to access your notes from anywhere.
-• Added a print button that prints the note page only.
-• Added a dark theme.
+- Fully client side full site text and image search meaning you can host this interface with basic static website hosting.
+- Cache powered searching for pages and images for instant search results.
+- The current page view is sharable using a link so you can bookmark it to come back to it later.
+- Added font size adjustment buttons.
+- Added automatic resizing of the page contents to the largest available image.
+- Made both panels resizable by dragging the middle divider.
+- Made the interface mobile friendly allowing you to access your notes from anywhere.
+- Added a print button that prints the note page only.
+- Added a dark theme.
 
 ## Download
 [Releases](https://github.com/coregtree/cherrytree-notes-web-interface/releases)
