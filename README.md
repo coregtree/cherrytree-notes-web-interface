@@ -3,7 +3,7 @@ A web interface upgrade for cherrytree notes providing a significant upgrade to 
 
 View the full guide here:
 
-#Features
+## Features
 • Fully client side full site text and image search meaning you can host this interface with basic static website hosting.
 • Cache powered searching for pages and images for instant search results.
 • The current page view is sharable using a link so you can bookmark it to come back to it later.
@@ -14,10 +14,10 @@ View the full guide here:
 • Added a print button that prints the note page only.
 • Added a dark theme.
 
-#Download
+## Download
 [Releases](https://github.com/coregtree/cherrytree-notes-web-interface/releases)
 
-#Basic Installation
+## Basic Setup
 1. Export your notes to HTML using these export settings:
 <img width="900" height="920" alt="image" src="https://github.com/user-attachments/assets/9140fc6b-3b1d-4a02-9085-4a07f760b9f9" />
 
