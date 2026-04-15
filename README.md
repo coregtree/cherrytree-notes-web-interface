@@ -1,14 +1,14 @@
 # cherrytree-notes-web-interface
-A web interface upgrade for cherrytree notes providing a significant upgrade to the default website interface given by cherytree when using the "Export as HTML" function. This interface remains fully client side. It provides full instant (through cache files) image and text search across all pages, makes the interface mobile friendly, adds a dark theme, and much more. Now you can take your notes anywhere on any device if you host your notes online. There are ways to reduce your websites visibility online in the full guide.
+A web interface upgrade for cherrytree notes providing an upgrade to the default website interface given by cherytree when using the "Export as HTML" function. This interface remains fully client side. It provides full image and text search (with cache files) across all pages, makes the interface mobile friendly, adds a dark theme, and much more. Now you can view your notes anywhere on any device if you use GitHub Pages for hosting and combine it with Github (set as a private repo) version control to easily update website note files. There are ways to reduce your websites visibility online in the full guide below.
 
-View the full guide here:
+View the live interface and full guide here:
 
 ## Features
-- Fully client side full site text and image search meaning you can host this interface with basic static website hosting.
-- Cache powered searching for pages and images for instant search results.
-- The current page view is sharable using a link so you can bookmark it to come back to it later.
+- Fully client side text and image search meaning you can host this interface with basic static website hosting.
+- Added a cache for instant search results when searching page and image text.
+- Made any page view sharable using a link so you can bookmark it to come back to it later.
 - Added font size adjustment buttons.
-- Added automatic resizing of the page contents to the largest available image.
+- Added automatic resizing of the page contents to the largest image on each page.
 - Made both panels resizable by dragging the middle divider.
 - Made the interface mobile friendly allowing you to access your notes from anywhere.
 - Added a print button that prints the note page only.
