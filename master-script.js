@@ -196,6 +196,14 @@ function printIframe() {
         display: revert !important;
       }
 
+      .page * {
+        color: black !important; 
+      }
+        
+      div.page * {
+        color: black !important;
+      }
+
       [style*="display:none"] {
         display: revert !important;
       }
