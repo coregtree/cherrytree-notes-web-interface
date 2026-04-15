@@ -52,5 +52,8 @@ the HTML files, prompting a download for "page-structure-cache.json", and then s
 and promt a download for "image-text-cache.json". MAKE SURE TO ALLOW MULTIPLE DOWNLOADS FOR THE SITE
 IN YOUR BROWSER. Upload both of these cache files to the sites main root folder.
 
+## Support Me
+If this project helped you please say thank you here, [Ko-Fi Link](https://ko-fi.com/coregtree)!
+
 
 
