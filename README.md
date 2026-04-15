@@ -49,7 +49,8 @@ See the hosting guide here using GitHub Pages for free hosting and how to reduce
 5. Once you have access to the web interface in your browser you will need to download the page structure and
 image structure cache files by clicking "Download Search Cache Files". This will generate a cached structure of
 the HTML files, prompting a download for "page-structure-cache.json", and then scan the text inside every image
-and promt a download for "image-text-cache.json". Upload both of these cache files to the sites main root folder.
+and promt a download for "image-text-cache.json". MAKE SURE TO ALLOW MULTIPLE DOWNLOADS FOR THE SITE
+IN YOUR BROWSER. Upload both of these cache files to the sites main root folder.
 
 
 
