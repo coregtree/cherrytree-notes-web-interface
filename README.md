@@ -5,7 +5,8 @@ View the live interface and full guide here:
 
 ## Features
 - Fully client side text and image search meaning you can host this interface with basic static website hosting.
-- Added a cache for instant search results when searching page and image text.
+- Added caching for instant search results when searching page and image text.
+- Made the <TAB> key go to the next result.
 - Made any page view sharable using a link so you can bookmark it to come back to it later.
 - Added font size adjustment buttons.
 - Added automatic resizing of the page contents to the largest image on each page.
