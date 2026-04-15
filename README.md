@@ -1,5 +1,5 @@
 # cherrytree-notes-web-interface
-A web interface upgrade for cherrytree notes providing a significant upgrade to the default website interface given by cherytree when using the "Export as HTML" function. This interface remains fully client side. It provides full instant (through cache files) image and text search across all pages, makes the interface mobile friendly, adds a dark theme, and much more. Now you can take your notes anywhere on any device if you host your notes online. There are ways to reduce your websites visibility online below in the Installation instructions.
+A web interface upgrade for cherrytree notes providing a significant upgrade to the default website interface given by cherytree when using the "Export as HTML" function. This interface remains fully client side. It provides full instant (through cache files) image and text search across all pages, makes the interface mobile friendly, adds a dark theme, and much more. Now you can take your notes anywhere on any device if you host your notes online. There are ways to reduce your websites visibility online in the full guide.
 
 View the full guide here:
 
@@ -18,9 +18,7 @@ View the full guide here:
 1. Export your notes to HTML using these export settings:
 <img width="900" height="920" alt="image" src="https://github.com/user-attachments/assets/9140fc6b-3b1d-4a02-9085-4a07f760b9f9" />
 
-These export settings are a requirement:
-• “Include Node Name”
-• “Links Tree in Every Page”
+These export settings are a requirement: “Include Node Name”, “Links Tree in Every Page”
 <img width="900" height="883" alt="image" src="https://github.com/user-attachments/assets/2f8d8519-8533-4a7a-9dc9-6a7dbee616d1" />
 
 2. Open the exported HTML notes folder and copy the “master.css” and “master-script.js”
@@ -46,7 +44,7 @@ See the hosting guide here using GitHub Pages for free hosting and how to reduce
 5. Once you have access to the web interface in your browser you will need to download the page structure and
 image structure cache files by clicking "Download Search Cache Files". This will generate a cached structure of
 the HTML files, prompting a download for "page-structure-cache.json", and then scan the text inside every image
-and promt a download for "image-text-cache.json". Upload/place both of these cache files to the sites main root folder.
+and promt a download for "image-text-cache.json". Upload both of these cache files to the sites main root folder.
 
 
 
