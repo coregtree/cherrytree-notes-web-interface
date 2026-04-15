@@ -1,7 +1,7 @@
 # cherrytree-notes-web-interface
 A web interface upgrade for cherrytree notes providing an upgrade to the default website interface given by cherytree when using the "Export as HTML" function. This interface remains fully client side. It provides full image and text search (with cache files) across all pages, makes the interface mobile friendly, adds a dark theme, and much more. Now you can view your notes anywhere on any device if you use GitHub Pages for hosting and combine it with Github (set as a private repo) version control to easily update website note files. There are ways to reduce your websites visibility online in the full guide below.
 
-View the live interface and full guide here: [Link to Guide and Live Interface](https://coregtree.github.io/cherrytree-notes-web-interface-documentation)
+View the live interface and full guide here: [Link to Guide and Live Interface](https://coregtree.github.io/cherrytree-notes-web-interface/)
 
 ## Features
 - Fully client side text and image search meaning you can host this interface with basic static website hosting.
@@ -44,7 +44,7 @@ of the file:
 
 4. Now you will need to host the HTML files using static website hosting or just run a local web server.
 See the hosting guide here using GitHub Pages for free hosting and how to reduce your sites visibility online:
-[Link to Hosting Your Notes Using Github Pages](https://coregtree.github.io/cherrytree-notes-web-interface-documentation/?page=2)
+[Link to Hosting Your Notes Using Github Pages](https://coregtree.github.io/cherrytree-notes-web-interface/?page=2)
 
 5. Once you have access to the web interface in your browser you will need to download the page structure and
 image structure cache files by clicking "Download Search Cache Files". This will generate a cached structure of
