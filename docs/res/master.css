@@ -1,0 +1,379 @@
+div.two-panels {
+  background-color: #181a1b;
+}
+
+.tree-panel {
+  background-color: #181a1b;
+  padding-right: 1vw;
+}
+
+.tree button {
+  color: white;
+}
+
+#index_header {
+  color: white;
+}
+
+p:has(> img) {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+p:has(> span) {
+  text-align: center;
+}
+
+.page {
+  margin: auto;
+}
+
+ul.outermost {
+  /* ALSO SET adjustSectionFont variable for font size IN adjustSectionFont function in master-script.js  */
+  --tree-font-modifier: 0.6rem; 
+   font-size: clamp(
+    var(--tree-font-modifier, 0.6rem), 
+    1vw + var(--tree-font-modifier, 0.6rem), 
+    calc(var(--tree-font-modifier, 0.6rem) + 0.6rem)
+  );
+}
+
+.page {
+  /* ALSO SET adjustSectionFont variable for font size IN adjustSectionFont function in master-script.js  */
+ --page-font-modifier: 0.6rem;
+}
+.page * {
+  color:white !important;
+}
+.page p, .page li, .page h1, .page h2, .page h3, .page sup {
+  font-size: clamp(
+    var(--page-font-modifier, 0.6rem), 
+    1vw + var(--page-font-modifier, 0.6rem), 
+    calc(var(--page-font-modifier, 0.6rem) + 0.6rem)
+  );
+}
+div.page p, div.page li, div.page h1, div.page h2, div.page h3, div.page sup { 
+  font-size: clamp(
+    var(--page-font-modifier, 0.6rem), 
+    1vw + var(--page-font-modifier, 0.6rem), 
+    calc(var(--page-font-modifier, 0.6rem) + 0.6rem)
+  ) !important;
+}
+
+@media (min-width: 1px) {
+  .tree-panel.tree-panel.tree-panel {
+    flex: 49vw ;
+  }
+
+  .page-panel.page-panel.page-panel {
+    flex: 50vw ;
+  }
+}
+
+@media (min-width: 1000px) {
+  .tree-panel.tree-panel.tree-panel {
+    flex: 34vw ;
+  }
+
+  .page-panel.page-panel.page-panel {
+    flex: 65vw ;
+  }
+}
+
+@media (min-width: 1500px) {
+  .tree-panel.tree-panel.tree-panel {
+    flex: 24vw ;
+  }
+
+  .page-panel.page-panel.page-panel {
+    flex: 75vw ;
+  }
+}
+
+#tree_panel_toggle_btn  {
+  /* Forces the browser to ignore its own touch logic */
+  touch-action: none !important;
+  /* Prevents text selection while dragging */
+  user-select: none;             
+  -webkit-user-select: none;
+  border: #303335 1px solid !important;
+}
+
+img {
+  max-width: 95%; /* Ensures an image scales down to fit the pages width */
+  height: auto;    /* Automatically adjusts the height to maintain the aspect ratio */
+}
+
+button {
+  cursor: pointer;
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none;   /* Safari, Chrome, Opera */
+  -moz-user-select: none;      /* Firefox */
+  -ms-user-select: none;       /* Internet Explorer/Edge */
+  user-select: none;           /* Standard syntax */
+
+  color: white;
+  border:solid 1px white !important;
+  border-radius: 30px;
+  font-size: clamp(0.6rem, 1vw + 0.6rem, 1.1rem);
+  padding: 0px !important;
+  padding-left: 6px !important;
+  padding-right: 6px !important;
+}
+
+button:active {
+  background-color: #586063;
+}
+
+.tree-panel li {
+  width: fit-content;
+  height: fit-content;
+  white-space: normal !important;
+  overflow-wrap: break-word;
+  display: flex !important;
+  align-items: start;
+  justify-content: space-between;
+  gap: 5px;
+}
+
+.tree li button {
+  display: inline !important;
+  margin-bottom: 4px;
+}
+
+.tree li a {
+  display: inline-block !important;
+  line-height: normal !important; 
+  outline: 1px solid #303335;
+  outline-offset: 1px;
+  border-radius: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  width: unset !important;
+}
+
+.heart-icon {
+  color: white;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.heart-icon::after {
+  content: "";
+  width: 10px;
+  height: 10px;
+
+  background-color: currentColor; /* This controls icon color */
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41 1.2 4.5 2.09C13.09 4.2 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / contain no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41 1.2 4.5 2.09C13.09 4.2 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z' fill='none' stroke='black' stroke-width='2'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+
+.link {
+  color:white !important;
+}
+
+.allPageTreeElementsContainer {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background-color: #181a1b;
+  margin-right: -1vw;
+  padding-right: 1vw;
+  padding-top: 20px;
+}
+
+.searchButton {
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' viewBox='0 0 24 24'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cline x1='21' y1='21' x2='16.65' y2='16.65'/%3E%3C/svg%3E"); 
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  cursor: pointer;
+}
+
+.searchButton:hover {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' stroke='grey' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' viewBox='0 0 24 24'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cline x1='21' y1='21' x2='16.65' y2='16.65'/%3E%3C/svg%3E");
+}
+
+.stopSearchButton {
+  display: inline-block;
+  width: 24px; 
+  height: 24px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%2724%27%20height%3D%2724%27%20viewBox%3D%270%200%2024%2024%27%20fill%3D%27none%27%20stroke%3D%27%23ffffff%27%20stroke-width%3D%272%27%20stroke-linecap%3D%27round%27%20stroke-linejoin%3D%27round%27%3E%3Cline%20x1%3D%2718%27%20y1%3D%276%27%20x2%3D%276%27%20y2%3D%2718%27%3E%3C%2Fline%3E%3Cline%20x1%3D%276%27%20y1%3D%276%27%20x2%3D%2718%27%20y2%3D%2718%27%3E%3C%2Fline%3E%3C%2Fsvg%3E");
+  cursor: pointer;
+}
+
+.stopSearchButton:hover {
+  background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%23808080%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cline%20x1%3D%2218%22%20y1%3D%226%22%20x2%3D%226%22%20y2%3D%2218%22%3E%3C%2Fline%3E%3Cline%20x1%3D%226%22%20y1%3D%226%22%20x2%3D%2218%22%20y2%3D%2218%22%3E%3C%2Fline%3E%3C%2Fsvg%3E");
+}
+
+.gear-icon {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background: no-repeat center/contain;
+  cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg%20fill%3D%27white%27%20xmlns%3D%27http://www.w3.org/2000/svg%27%20viewBox%3D%270%200%2024%2024%27%3E%3Cpath%20d%3D%27M19.14%2C12.94a7.43%2C7.43%2C0%2C0%2C0%2C.05-.94%2C7.43%2C7.43%2C0%2C0%2C0-.05-.94l2.11-1.65a.5.5%2C0%2C0%2C0%2C.12-.64l-2-3.46a.5.5%2C0%2C0%2C0-.6-.22l-2.49%2C1a7.28%2C7.28%2C0%2C0%2C0-1.63-.94l-.38-2.65A.5.5%2C0%2C0%2C0%2C13.78%2C2H10.22a.5.5%2C0%2C0%2C0-.49.42L9.35%2C5.07a7.28%2C7.28%2C0%2C0%2C0-1.63.94l-2.49-1a.5.5%2C0%2C0%2C0-.6.22l-2%2C3.46a.5.5%2C0%2C0%2C0%2C.12.64L4.86%2C11.06a7.43%2C7.43%2C0%2C0%2C0-.05.94%2C7.43%2C7.43%2C0%2C0%2C0%2C.05.94L2.75%2C14.59a.5.5%2C0%2C0%2C0-.12.64l2%2C3.46a.5.5%2C0%2C0%2C0%2C.6.22l2.49-1a7.28%2C7.28%2C0%2C0%2C0%2C1.63.94l.38%2C2.65a.5.5%2C0%2C0%2C0%2C.49.42h3.56a.5.5%2C0%2C0%2C0%2C.49-.42l.38-2.65a7.28%2C7.28%2C0%2C0%2C0%2C1.63-.94l2.49%2C1a.5.5%2C0%2C0%2C0%2C.6-.22l2-3.46a.5.5%2C0%2C0%2C0-.12-.64ZM12%2C15.5A3.5%2C3.5%2C0%2C1%2C1%2C15.5%2C12%2C3.5%2C3.5%2C0%2C0%2C1%2C12%2C15.5Z%27/%3E%3C/svg%3E");
+}
+
+.gear-icon:hover {
+  background-image: url("data:image/svg+xml,%3Csvg%20fill%3D%27grey%27%20xmlns%3D%27http://www.w3.org/2000/svg%27%20viewBox%3D%270%200%2024%2024%27%3E%3Cpath%20d%3D%27M19.14%2C12.94a7.43%2C7.43%2C0%2C0%2C0%2C.05-.94%2C7.43%2C7.43%2C0%2C0%2C0-.05-.94l2.11-1.65a.5.5%2C0%2C0%2C0%2C.12-.64l-2-3.46a.5.5%2C0%2C0%2C0-.6-.22l-2.49%2C1a7.28%2C7.28%2C0%2C0%2C0-1.63-.94l-.38-2.65A.5.5%2C0%2C0%2C0%2C13.78%2C2H10.22a.5.5%2C0%2C0%2C0-.49.42L9.35%2C5.07a7.28%2C7.28%2C0%2C0%2C0-1.63.94l-2.49-1a.5.5%2C0%2C0%2C0-.6.22l-2%2C3.46a.5.5%2C0%2C0%2C0%2C.12.64L4.86%2C11.06a7.43%2C7.43%2C0%2C0%2C0-.05.94%2C7.43%2C7.43%2C0%2C0%2C0%2C.05.94L2.75%2C14.59a.5.5%2C0%2C0%2C0-.12.64l2%2C3.46a.5.5%2C0%2C0%2C0%2C.6.22l2.49-1a7.28%2C7.28%2C0%2C0%2C0%2C1.63.94l.38%2C2.65a.5.5%2C0%2C0%2C0%2C.49.42h3.56a.5.5%2C0%2C0%2C0%2C.49-.42l.38-2.65a7.28%2C7.28%2C0%2C0%2C0%2C1.63-.94l2.49%2C1a.5.5%2C0%2C0%2C0%2C.6-.22l2-3.46a.5.5%2C0%2C0%2C0-.12-.64ZM12%2C15.5A3.5%2C3.5%2C0%2C1%2C1%2C15.5%2C12%2C3.5%2C3.5%2C0%2C0%2C1%2C12%2C15.5Z%27/%3E%3C/svg%3E");
+}
+
+.nav-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  margin: auto;
+  background-color: #181a1b;
+  margin-right: -1vw;
+}
+
+.nav-btn {
+  width: 35px;
+  height: 35px;
+  border: none;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 16px 16px;
+  cursor: pointer;
+}
+
+.nav-btn:active {
+  background-color: #586063;
+}
+
+/* LEFT "<" */
+.nav-prev {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M14 6l-6 6 6 6' stroke='%23ffffff' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+}
+
+.nav-prev:hover {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M14 6l-6 6 6 6' stroke='%23808080' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+}
+
+/* RIGHT ">" */
+.nav-next {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M10 6l6 6-6 6' stroke='%23ffffff' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+}
+
+.nav-next:hover {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M10 6l6 6-6 6' stroke='%23808080' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+}
+
+.nav-text {
+  flex-basis: 23%;
+  color: white;
+  font-size: clamp(0.5rem, 1vw + 0.5rem, 1rem);
+  text-align: center;
+}
+
+/* Copy Notification (Hidden by default) */
+#copy-link-message {
+    font-size: clamp(0.5rem, 1vw + 0.5rem, 1rem);
+    visibility: hidden;
+    min-width: 250px;
+    background-color: #586063;
+    color: #fff;
+    text-align: center;
+    border-radius: 50px;
+    padding: 16px;
+    position: fixed;
+    z-index: 1000;
+    left: 50%;
+    bottom: 30px;
+    transform: translateX(-50%);
+    opacity: 0;
+    transition: opacity 0.3s, bottom 0.3s;
+}
+
+/* Show state for the toast */
+#copy-link-message.show {
+    visibility: visible;
+    opacity: 1;
+    bottom: 50px;
+}
+
+#gotoinput {
+  font-size: clamp(0.5rem, 1vw + 0.5rem, 1rem);
+  border: 2px solid white;
+  outline: none; /* Removes the default browser focus ring */
+  field-sizing: content;
+  min-width: 25px;
+}
+
+/* Chrome, Safari, Edge, Opera */
+#gotoinput::-webkit-outer-spin-button,
+#gotoinput::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+#gotoinput[type=number] {
+  -moz-appearance: textfield;
+  appearance: textfield; /* Standard property for modern browsers */
+}
+
+::highlight(search-results) {
+  background-color: #ffd700;
+  color: #000;
+}
+
+.highlighted-tree-title {
+  background-color: #ffd700 !important;
+}
+
+.highlighted-image {
+  border: 5px solid #ffd700; /* Blue border */
+  box-shadow: 0 0 15px rgba(37, 99, 235, 0.6); /* Glow effect */
+  transition: all 0.3s ease; /* Smooth transition */
+  border-radius: 5px;
+}
+
+/* Prevent highlight from shifting other text. */
+mark { 
+  vertical-align: baseline; /* Ensures it stays on the text line */
+  line-height: inherit;
+}
+
+.no-select {
+  /* Safari */
+  -webkit-user-select: none; 
+  /* Konqueror HTML */
+  -khtml-user-select: none; 
+  /* Firefox */
+  -moz-user-select: none; 
+  /* Internet Explorer/Edge */
+  -ms-user-select: none; 
+  /* Standard property */
+  user-select: none; 
+}
+
+.onhover:hover {
+  color:grey !important;
+}
+
+ul li a.active {
+  background-color: #4CAF50; /* Green background for the active item */
+  color: white;
+}
+
+/* Color lefts for page tree links. */
+ul li a { color: white !important; }
+ul li a { color: lightseagreen !important; }
+ul ul li a { color: lightsalmon !important; }
+ul ul ul li a { color: lightgreen !important; }
+ul ul ul ul li a { color: lightskyblue !important; }
+ul ul ul ul ul li a { color: lightgoldenrodyellow !important; }
+ul ul ul ul ul ul li a { color: lightcyan !important; }
+ul ul ul ul ul ul ul li a { color: white !important; }
