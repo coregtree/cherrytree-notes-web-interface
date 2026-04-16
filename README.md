@@ -50,7 +50,7 @@ See the hosting guide here using GitHub Pages for free hosting and how to reduce
 [Link to Hosting Your Notes Using Github Pages](https://coregtree.github.io/cherrytree-notes-web-interface/?page=2)
 
 ## Support Me
-If you like this project you can donate here, thank you: [Ko-Fi Link](https://ko-fi.com/coregtree)
+If you like this project you can support me here, thank you: [Ko-Fi Link](https://ko-fi.com/coregtree)
 
 
 
