@@ -36,18 +36,18 @@ script.src = './res/master-script.js';
 document.head.appendChild(script);
 ```
 
-Right click -> edit the “styles4.css” file and add the following code in the “General” section
+4. Right click -> edit the “styles4.css” file and add the following code in the “General” section
 of the file:
 ```
 @import url("./master.css");
 ```
 
-4. Now you will need to host the HTML files using static website hosting or just run a local web server.
+5. Next you should start a temporary local web server for your website files, as cache generation can fail with static website hosts due to throttling. Once you have your local web server running you will need to generate and download the page structure and image structure cache files by clicking "Download Search Cache Files". This will generate a cached structure of the HTML files, prompting a download for "page-structure-cache.json", and then scan the text inside every image and promt a download for "image-text-cache.json". MAKE SURE TO ALLOW MULTIPLE DOWNLOADS FOR THE SITE IN YOUR BROWSER. Then upload both of these cache files to the sites main root folder. Remember to generate and upload new cache files when updating a site with new notes otherwise the search function will break from using a stale cache!
+<br><br>Note: If your cache generation ends without scanning all your images and providing both a “page-structure-cache.json” and a “image-text cache.json” file then your website host is throttling your page and file requests. In this case you should start a local web server temporarily to generate your cache files locally and then upload them to your sites root folder. This has been tested and can be done easily with an extenstion like “Live Server” in VS Code.
+
+6. Now you will need to host the HTML files using static website hosting or just start a local web server for viewing your notes.
 See the hosting guide here using GitHub Pages for free hosting and how to reduce your sites visibility online:
 [Link to Hosting Your Notes Using Github Pages](https://coregtree.github.io/cherrytree-notes-web-interface/?page=2)
-
-5. Now you should start a temporary local web server for your website files, as cache generation can fail with static website hosts due to throttling. Once you have your local web server running you will need to generate and download the page structure and image structure cache files by clicking "Download Search Cache Files". This will generate a cached structure of the HTML files, prompting a download for "page-structure-cache.json", and then scan the text inside every image and promt a download for "image-text-cache.json". MAKE SURE TO ALLOW MULTIPLE DOWNLOADS FOR THE SITE IN YOUR BROWSER. Then upload both of these cache files to the sites main root folder. Remember to generate and upload new cache files when updating a site with new notes otherwise the search function will break from using a stale cache!
-<br><br>Note: If your cache generation ends without scanning all your images and providing both a “page-structure-cache.json” and a “image-text cache.json” file then your website host is throttling your page and file requests. In this case you should start a local web server temporarily to generate your cache files locally and then upload them to your sites root folder. This has been tested and can be done easily with an extenstion like “Live Server” in VS Code.
 
 ## Support Me
 If you like this project you can donate here, thank you: [Ko-Fi Link](https://ko-fi.com/coregtree)
