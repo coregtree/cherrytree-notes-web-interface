@@ -162,6 +162,55 @@ listItems.forEach(function(element) {
     });
 });
 
+// Retrieves the page number from a pages filename value.
+function getPageNumberFromFilename(value) {
+    const match = value.match(/(\d+)\.html/);
+    // Use ?. to safely access index 1, or default to null if match is null
+    const n = Number(match?.[1]); 
+    return Number.isNaN(n) ? null : n;
+}
+
+// A loop that watches the iFrame every second and updates the selected tree link in cases where the user clicks a page reference inside the iFrame.
+// This is a good solution because detecting clicks inside the iframe by injecting onclick code dynamically can mess up the
+// page structure and ruin the search function.
+setInterval(() => {
+  const iframeRef = document.getElementById('page_frame');
+  if (iframeRef) {
+    const iframeDoc = iframeRef.contentDocument || iframeRef.contentWindow.document;
+    if (iframeDoc) {
+        const targetActivePageNumber = getPageNumberFromFilename(iframeDoc.location.pathname.split('/').pop());
+        if (targetActivePageNumber) {
+            const currentActivePageLink = document.querySelector('.tree li a.active');
+            let currentActivePageNumber = null;
+            if (currentActivePageLink) {
+                currentActivePageNumber = getNodePageIndexNumber(currentActivePageLink);
+            } 
+
+            // If no tree link is chosen but a frame is active or if the active frame and active tree link are different we update the tree link and URL.
+            if (!currentActivePageLink || (currentActivePageNumber && currentActivePageNumber !== targetActivePageNumber)) { 
+
+                const foundLink = Array.from(listItems).find(link => {
+                    const potentialPageNumber = getNodePageIndexNumber(link);  
+                    // If the page numbers match the correct page has been found.
+                    return targetActivePageNumber == potentialPageNumber;
+                });
+
+                foundLink.click();
+
+                // Scrolls the page link into view in the tree panel.
+                foundLink.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'center',
+                    inline: 'nearest'
+                });
+
+            }
+        }
+    }
+  }
+}, 1000);
+
+
 //------------------------------------------------------------------------------------------
 // This section is for working inside the dynamically added iFrame on the page side.
 // This requires reaching into the dynamically added iframe by the scipt3.js script.
@@ -295,6 +344,30 @@ const observer = new MutationObserver((mutations, obs) => {
                 }
 
                 pageSectionStyles  = getComputedStyle(container); // Update iFrame reference for page styles and font sizes.
+
+                // Link click listener for iframe link support. Placed in the head so it does not break our page cache.
+                iframeDoc.addEventListener('click', function(e) {
+                    // Find if the clicked element is a link.
+                    const target = e.target.closest('a');
+                    if (!target || !target.href) return;
+
+                    try {
+                        const url = new URL(target.href, iframeDoc.location.href);
+                        const isExternal = url.hostname !== iframeDoc.location.hostname;
+
+                        if (isExternal) {
+                            // Intercept the click to avoid DOM modification.
+                            e.preventDefault();
+                            
+                            // Open in a new tab manually.
+                            // This keeps the <body> cache clean of 'target' attributes.
+                            window.open(target.href, '_blank', 'noopener,noreferrer');
+                        }
+                        // Internal links will be opened normally inside the iframe.
+                    } catch (err) {
+                        console.error("Invalid URL detected:", err);
+                    }
+                }, true); // Use capture phase to catch the event early
 
 				const images = container.querySelectorAll('img');
 				console.log(`Found ${images.length} images inside the iframe container. Page container resized to the largest image.`);
@@ -899,6 +972,24 @@ window.addEventListener('load', () => {
         if (currentSearchController) { // Stops the current search using an abord signal to the currently active searches AbortController down below.
             currentSearchController.abort();
         }   
+        else { // Normal search query clear.
+            searchbox.value = '';
+            updatePageTreeHighlights();
+            hideStatusLabel();
+
+            // Update URL to remove search parameters.
+            const updateURL = new URL(window.location.href);
+
+            updateURL.searchParams.delete('t');
+            updateURL.searchParams.delete('q');
+            updateURL.searchParams.delete('all');
+            
+            // Update the browser's history entry with the modified URL.
+            window.history.replaceState({}, '', updateURL.toString());
+
+            // Reload the page.
+            window.location.reload();
+        }
     });
 
     // Resets page to the default state.
@@ -1816,14 +1907,6 @@ window.addEventListener('load', () => {
             includeImagesInSearch = true;
         }
 
-        // Retrieves the page number from a pages filename value.
-        function getPageNumberFromFilename(value) {
-            const match = value.match(/(\d+)\.html/);
-            // Use ?. to safely access index 1, or default to null if match is null
-            const n = Number(match?.[1]); 
-            return Number.isNaN(n) ? null : n;
-        }
-
         let includeAllPagesInSearch = false;
         let selectedPage = null;
         if (searchall_pages_checkbox.checked == true) { // Checks wheter user wants to search all pages.
@@ -2395,7 +2478,6 @@ window.addEventListener('load', () => {
             }
         } finally { // Search completed. Reset AbortController and update navigation.
             if (currentSearchController?.signal === signal) {
-                showSearchButton();
                 currentSearchController = null;
                 return true;
             }
