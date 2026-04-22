@@ -13,6 +13,7 @@ View the live interface and full guide here: [Link to Guide and Live Interface](
 - Made both panels resizable by dragging the middle divider.
 - Made the interface mobile friendly allowing you to access your notes from anywhere.
 - Added a print button that prints the note page only.
+- Added support for “Link to Node” links and external links.
 - Added a dark theme.
 
 ## Download
