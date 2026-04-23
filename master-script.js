@@ -1,8 +1,7 @@
 /**
- * @version 1.0
+ * @version 1.0.2
  * @author coregtree
  * @license GPL-3.0
- * @date 2026-04-13
  * @github https://github.com/coregtree/cherrytree-notes-web-interface
  */
 
@@ -719,7 +718,7 @@ window.addEventListener('load', () => {
 
     const navTextContainer = document.createElement("span");
 
-    const goToInput = document.createElement("input");
+    let goToInput = document.createElement("input"); // This should stay let so it can be overwritten.
     goToInput.type = "number";
     goToInput.id = "gotoinput";
     goToInput.style.textAlign = 'center';
@@ -950,6 +949,9 @@ window.addEventListener('load', () => {
 
     searchButton.addEventListener("click", async (event) => {
         event.preventDefault();   
+        if (currentSearchController) { // Stops and clears any previous searches using an abord signal to the potentially active AbortController instance down below.
+            currentSearchController.abort();
+        } 
         hideNavigation();
         updatePageTreeHighlights();
         performSearch(false); // False means cache download not requested so this is a normal search.
@@ -958,11 +960,34 @@ window.addEventListener('load', () => {
     searchbox.addEventListener('keydown', function(event) {
     if (event.key === 'Enter') {
         if (!event.shiftKey) { // Ignore Shift+Enter to allow blocks of text in the searchbox.
-            event.preventDefault();   
+            event.preventDefault(); 
+            if (currentSearchController) { // Stops and clears any previous searches using an abord signal to the potentially active AbortController instance down below.
+                currentSearchController.abort();
+            }   
             hideNavigation();
             updatePageTreeHighlights();
             performSearch(false);
         }
+    }
+    });
+
+     // Adds TAB button navigation for results.
+    let isCoolingDown = false;
+    window.addEventListener('keydown', function (event) {
+    if (event.key === 'Tab') {
+        event.preventDefault(); // Stops focus from moving to other elements.
+
+        // If we are in the cooldown period, block the press.
+        if (isCoolingDown) {
+            return;
+        }
+        
+        nextBtn.click();
+
+        isCoolingDown = true;
+        setTimeout(() => { // Start cooldown period.
+            isCoolingDown = false;
+        }, 100); 
     }
     });
 
@@ -1086,6 +1111,11 @@ window.addEventListener('load', () => {
                 return candidatePageIndex && candidatePageIndex == urlPage;
             });
             pageToVisit.click();
+            pageToVisit.scrollIntoView({
+                behavior: 'smooth',
+                block: 'center',    // This centers the range vertically
+                inline: 'nearest'   // This keeps it visible horizontally
+            });
             urlPage = null;
         }
     }
@@ -1898,7 +1928,6 @@ window.addEventListener('load', () => {
         return pageItemsArray;
     }
 
-
     //// MAIN SECTION THAT USES ALL OF THE ABOVE FUNCTIONS TO PERFORM THE SEARCH, FILTER RESULTS, CACHE RESULTS AND TO DISPLAY RESULTS.
     async function performSearch(cacheDownloadRequested) {
             
@@ -1934,6 +1963,7 @@ window.addEventListener('load', () => {
         // Ensures any previous searches are stopped before starting a new search.
         if (currentSearchController) {
             currentSearchController.abort(); 
+            currentSearchController = null; // Clear it so performSearch can start fresh
             console.log('Signal sent to stop previous OCR.');
             updateStatusLabel('Search ended early.');
             return null;
@@ -2259,23 +2289,30 @@ window.addEventListener('load', () => {
                 let activeiFrameRange = null;
                 let activeLiveTokens = null;
 
+                // Remove old instances of goToInput so they do not not multiply.
+                const newGoToInput = goToInput.cloneNode(true);
+                goToInput.parentNode.replaceChild(newGoToInput, goToInput);
+                goToInput = newGoToInput; // Update reference.
+                
                 // Navigation that takes the user to specified page they typed in.
-                const clamp = (num, min, max) => Math.min(Math.max(num, min), max); // Sanitizes the users request to valid number ranges. 
-                function handleGoTo(event) {
-                    if (event.type === 'click' || event.key === 'Enter') {
-                        const val = parseInt(goToInput.value, 10);
-                        if (!isNaN(val)) {
-                            // If user enters 110 but max is 100, result is 100.
-                            let safeValue = clamp(val, 1, combinedResults.length);
-                            // Update the input field visually to show the clamped value.
-                            goToInput.value = safeValue; 
-                            entryPointer = goToInput.value - 1;
-                            navigateToElement();
+                if (!signal.aborted) { // This alone does not stop duplicate listeners.
+                    const clamp = (num, min, max) => Math.min(Math.max(num, min), max); // Sanitizes the users request to valid number ranges. 
+                    function handleGoTo(event) {
+                        if (event.type === 'click' || event.key === 'Enter') {
+                            const val = parseInt(goToInput.value, 10);
+                            if (!isNaN(val)) {
+                                // If user enters 110 but max is 100, result is 100.
+                                let safeValue = clamp(val, 1, combinedResults.length);
+                                // Update the input field visually to show the clamped value.
+                                goToInput.value = safeValue; 
+                                entryPointer = goToInput.value - 1;
+                                navigateToElement();
+                            }
                         }
                     }
+                    goToInput.addEventListener('keydown', handleGoTo, { signal });
+                    goToInput.addEventListener('click', handleGoTo, { signal }); // For go to via URL search parameters functionality.
                 }
-                goToInput.addEventListener('keydown', handleGoTo);
-                goToInput.addEventListener('click', handleGoTo); // User for go to via URL search parameters.
 
                 // Update the <input> element to show the user the result that is being displayed.
                 if (searchURLSuccess && urlPageToken) { // URL Based search occured. Navigate to specified token.
@@ -2378,26 +2415,6 @@ window.addEventListener('load', () => {
                     
                     navigateToElement();
                 };
-
-                // Adds TAB button navigation for results.
-                let isCoolingDown = false;
-                window.addEventListener('keydown', function (event) {
-                if (event.key === 'Tab') {
-                    event.preventDefault(); // Stops focus from moving to other elements.
-
-                    // If we are in the cooldown period, block the press.
-                    if (isCoolingDown) {
-                        return;
-                    }
-                    
-                    nextBtn.click();
-
-                    isCoolingDown = true;
-                    setTimeout(() => { // Start cooldown period.
-                        isCoolingDown = false;
-                    }, 100); 
-                }
-                });
 
                 //Used to display the new iFrame that is requested.
                 function changeFrameToPage(filename) {
