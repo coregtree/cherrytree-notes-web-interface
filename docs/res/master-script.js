@@ -1,5 +1,5 @@
 /**
- * @version 1.0.2
+ * @version 1.0.3
  * @author coregtree
  * @license GPL-3.0
  * @github https://github.com/coregtree/cherrytree-notes-web-interface
@@ -60,6 +60,7 @@ function adjustSectionFont(target, selector, action, variablename, newTreeFontSi
 // In this section:
 // Added adjust font size buttons for tree side.
 // Added active page function to show user which they are on currently.
+// Added support for right click -> new tab for page tree links.
 
 // Function to find a button by its text content.
 function findButtonByText(text) {
@@ -159,6 +160,43 @@ listItems.forEach(function(element) {
         // Add the 'active' class to the clicked item.
         this.classList.add('active');
     });
+});
+
+// Listen for right-clicks to dynamically update links to allow for right click -> open new tap on tree titles.
+document.addEventListener('contextmenu', function(e) {
+    const target = e.target.closest('a[onclick]');
+    if (!target || !target.href) return;
+
+    try {
+        // Insert link hrefs based on the current domain name. This allows right click -> new tab to work.
+        document.querySelectorAll('a[onclick]').forEach(a => {
+            try {
+                const currentUrl = new URL(window.location.href);
+
+                // Backup page font size selection arguments.
+                const savedArguments = ['pf', 'tf'];
+                let savedParams = {};
+                savedArguments.forEach(param => {
+                    if (currentUrl.searchParams.has(param)) {
+                        savedParams[param] = currentUrl.searchParams.get(param);
+                    }
+                });
+
+                currentUrl.search = ""; // Wipe out all link arguments.
+
+                Object.keys(savedParams).forEach(param => { // Restore saved arguments.
+                    currentUrl.searchParams.set(param, savedParams[param]);
+                });
+
+                currentUrl.searchParams.set('page', getNodePageIndexNumber(a));
+                a.href = currentUrl.toString();
+            } catch (err) {
+                console.error("Could not parse or update link URL:", err);
+            }
+        });
+    } catch (err) {
+        console.error("Could not update link on right-click:", err);
+    }
 });
 
 // Retrieves the page number from a pages filename value.
@@ -344,7 +382,8 @@ const observer = new MutationObserver((mutations, obs) => {
 
                 pageSectionStyles  = getComputedStyle(container); // Update iFrame reference for page styles and font sizes.
 
-                // Link click listener for iframe link support. Placed in the head so it does not break our page cache.
+                // Link opening handling section. Event Listeners are placed in the iframe head sections so they do not break the page cache.
+                // For left click on a link.
                 iframeDoc.addEventListener('click', function(e) {
                     // Find if the clicked element is a link.
                     const target = e.target.closest('a');
@@ -362,11 +401,67 @@ const observer = new MutationObserver((mutations, obs) => {
                             // This keeps the <body> cache clean of 'target' attributes.
                             window.open(target.href, '_blank', 'noopener,noreferrer');
                         }
+
+                        // Check if the user is holding Ctrl (Windows) or Cmd (Mac).
+                        const isNewTabModifier = e.ctrlKey || e.metaKey;
+
+                        // Handle Internal Links with Ctrl/Cmd clicks.
+                        if (!isExternal && isNewTabModifier) {
+                            e.preventDefault(); // Stop the native browser new tab action.
+
+                            const currentUrl = new URL(window.location.href);
+                            currentUrl.searchParams.set('page', getPageNumberFromFilename(target.href));
+                            window.open(currentUrl.toString(), '_blank', 'noopener,noreferrer');
+                        }
+
                         // Internal links will be opened normally inside the iframe.
                     } catch (err) {
                         console.error("Invalid URL detected:", err);
                     }
                 }, true); // Use capture phase to catch the event early
+
+                // For right click -> new tab on a link. The built in menu cannot handle new tab clicks due to the iFrame dependant design
+                // so we handle it here.
+                // This runs the millisecond a user right-clicks, BEFORE the context menu generates.
+                iframeDoc.addEventListener('contextmenu', function(e) {
+                    const target = e.target.closest('a');
+                    if (!target || !target.href) return;
+
+                    try {
+                        const url = new URL(target.href, iframeDoc.location.href);
+                        const isExternal = url.hostname !== iframeDoc.location.hostname;
+
+                        if (!isExternal) {
+                            e.preventDefault(); // Block usual right click menu from showing.
+
+                            const currentUrl = new URL(window.location.href);
+                            currentUrl.searchParams.set('page', getPageNumberFromFilename(target.href));
+                            window.open(currentUrl.toString(), '_blank', 'noopener,noreferrer');
+                        }
+                    } catch (err) {
+                        console.error("Invalid URL on right-click:", err);
+                    }
+                }, true);
+
+                // Middle scroll wheel click on link.
+                iframeDoc.addEventListener('auxclick', function(e) {
+                    const target = e.target.closest('a');
+                    if (!target || !target.href) return;
+
+                    // Check if it's a middle click (button 1).
+                    if (e.button === 1) {
+                        const url = new URL(target.href, iframeDoc.location.href);
+                        const isExternal = url.hostname !== iframeDoc.location.hostname;
+
+                        if (!isExternal) {
+                            e.preventDefault(); // Block usual right click menu from showing.
+
+                            const currentUrl = new URL(window.location.href);
+                            currentUrl.searchParams.set('page', getPageNumberFromFilename(target.href));
+                            window.open(currentUrl.toString(), '_blank', 'noopener,noreferrer');
+                        }
+                    }
+                }, true);
 
 				const images = container.querySelectorAll('img');
 				console.log(`Found ${images.length} images inside the iframe container. Page container resized to the largest image.`);
@@ -868,10 +963,10 @@ window.addEventListener('load', () => {
         supportContainer.style.alignItems = 'end';
         supportContainer.style.rowGap = '2px';
         supportContainer.innerHTML = `
-        <a class="onhover link" href="https://github.com/coregtree/cherrytree-notes-web-interface" target="_blank">cherrytree Web Interface Github</a>
-        <a class="onhover link" href="https://github.com/giuspen/cherrytree" target="_blank">cherrytree Notes Github</a>
-        <a class="onhover link" href="https://ko-fi.com/coregtree" target="_blank">Support cherrytree Web Interface</a>
-        <a class="onhover link" href="https://www.giuspen.net/cherrytree/" target="_blank">Support cherrytree Notes</a>
+        <a class="onhover link" href="https://github.com/coregtree/cherrytree-notes-web-interface" target="_blank">CherryTree Web Interface Github</a>
+        <a class="onhover link" href="https://github.com/giuspen/cherrytree" target="_blank">CherryTree Notes Github</a>
+        <a class="onhover link" href="https://ko-fi.com/coregtree" target="_blank">Support CherryTree Web Interface</a>
+        <a class="onhover link" href="https://ko-fi.com/giuspen" target="_blank">Support CherryTree Notes</a>
         `;
     });
 
