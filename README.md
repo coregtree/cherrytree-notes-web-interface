@@ -2,7 +2,7 @@
 A web interface upgrade for [CherryTree notes](https://github.com/giuspen/cherrytree) providing an upgrade to the default website interface given by CherryTree when using the "Export as HTML" function. This interface remains fully client side. It provides full image and text search (with cache files) across all pages, makes the interface mobile friendly, adds a dark theme, and much more. Now you can view your notes anywhere on any device if you use GitHub Pages for hosting and combine it with Github repos to easily update website note files (set as a private repo). There are ways to reduce your websites visibility online in the full guide below.
 
 View the live interface and full guide here: [Link to Guide and Live Interface](https://coregtree.github.io/cherrytree-notes-web-interface/?page=1)  
-YouTube Video Guide: [Link to Video](https://www.youtube.com/watch?v=iwbg99sqGRY)
+Video Guide: [Link to YouTube Video](https://www.youtube.com/watch?v=iwbg99sqGRY)
 
 ## Features
 - Fully client side text and image search meaning you can host this interface with basic static website hosting.
