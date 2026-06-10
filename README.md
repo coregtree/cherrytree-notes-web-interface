@@ -3,9 +3,6 @@ A web interface upgrade for [CherryTree notes](https://github.com/giuspen/cherry
 
 View the live interface and full guide here: [Link to Guide and Live Interface](https://coregtree.github.io/cherrytree-notes-web-interface/?page=1)
 
-## Video Guide
-[![YouTube Video](https://img.youtube.com/vi/iwbg99sqGRY/0.jpg)](https://www.youtube.com/watch?v=iwbg99sqGRY)
-
 ## Features
 - Fully client side text and image search meaning you can host this interface with basic static website hosting.
 - Added caching for instant search results when searching page and image text.
@@ -18,6 +15,9 @@ View the live interface and full guide here: [Link to Guide and Live Interface](
 - Added a print button that prints the note page only.
 - Added support for “Link to Node” links and external links.
 - Added a dark theme.
+
+## Video Guide
+[![YouTube Video](https://img.youtube.com/vi/iwbg99sqGRY/0.jpg)](https://www.youtube.com/watch?v=iwbg99sqGRY)
 
 ## Download
 See: [Releases](https://github.com/coregtree/cherrytree-notes-web-interface/releases)
